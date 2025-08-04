@@ -1,6 +1,6 @@
 # Dagger CircleCI Orb
 
-[![CircleCI Build Status](https://circleci.com/gh/98KhFjn8YyZY9qoBGmzCBs/dagger-for-circleci.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/98KhFjn8YyZY9qoBGmzCBs/dagger-for-circleci) [![CircleCI Orb Version](https://badges.circleci.com/orbs/cci-labs/dagger-for-circleci.svg)](https://circleci.com/developer/orbs/orb/cci-labs/dagger-for-circleci) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/98KhFjn8YyZY9qoBGmzCBs/dagger-for-circleci/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
+[![CircleCI Build Status](https://dl.circleci.com/status-badge/img/circleci/98KhFjn8YyZY9qoBGmzCBs/DpvH7UKiQ3ppg1Jp1vBxip/tree/main.svg?style=shield "CircleCI Build Status")](https://app.circleci.com/pipelines/circleci/98KhFjn8YyZY9qoBGmzCBs/DpvH7UKiQ3ppg1Jp1vBxip) [![CircleCI Orb Version](https://badges.circleci.com/orbs/cci-labs/dagger-for-circleci.svg)](https://circleci.com/developer/orbs/orb/cci-labs/dagger-for-circleci) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/CircleCI-Labs/dagger-for-circleci/refs/heads/main/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
 A CircleCI orb for integrating [Dagger](https://dagger.io/) workflows into your CI/CD pipelines. This orb provides the same functionality as the [official Dagger GitHub Action](https://github.com/dagger/dagger-for-github) with full parameter compatibility.
 
@@ -271,10 +271,10 @@ workflows:
     verb: "run"
     args: "go test ./..."
 
-# Query Dagger functions
+# Query Dagger core version
 - dagger/dagger:
-    verb: "functions"
-    module: "./ci"
+    verb: "core"
+    args: "version"
 
 # Call with custom working directory
 - dagger/dagger:
@@ -375,7 +375,7 @@ For detailed testing instructions, see [testing/README.md](testing/README.md).
 
 ### How to Contribute
 
-We welcome [issues](https://github.com/98KhFjn8YyZY9qoBGmzCBs/dagger-for-circleci/issues) to and [pull requests](https://github.com/98KhFjn8YyZY9qoBGmzCBs/dagger-for-circleci/pulls) against this repository!
+We welcome [issues](https://github.com/CircleCI-Labs/dagger-for-circleci/issues) to and [pull requests](https://github.com/CircleCI-Labs/dagger-for-circleci/pulls) against this repository!
 
 **Before contributing:**
 - Run the test suite in the `testing/` directory
@@ -387,7 +387,7 @@ We welcome [issues](https://github.com/98KhFjn8YyZY9qoBGmzCBs/dagger-for-circlec
     - For the best experience, squash-and-merge and use [Conventional Commit Messages](https://conventionalcommits.org/).
 2. Find the current version of the orb.
     - You can run `circleci orb info cci-labs/dagger-for-circleci | grep "Latest"` to see the current version.
-3. Create a [new Release](https://github.com/98KhFjn8YyZY9qoBGmzCBs/dagger-for-circleci/releases/new) on GitHub.
+3. Create a [new Release](https://github.com/CircleCI-Labs/dagger-for-circleci/releases/new) on GitHub.
     - Click "Choose a tag" and _create_ a new [semantically versioned](http://semver.org/) tag. (ex: v1.0.0)
       - We will have an opportunity to change this before we publish if needed after the next step.
 4.  Click _"+ Auto-generate release notes"_.
