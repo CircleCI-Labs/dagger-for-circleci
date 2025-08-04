@@ -66,7 +66,8 @@ jobs:
           debug: true
       # Test dagger core engine connectivity 
       - dagger-for-circleci/dagger:
-          verb: "core version"
+          verb: "core"
+          args: "version"
           debug: true
       # Test with custom flags
       - dagger-for-circleci/dagger:
