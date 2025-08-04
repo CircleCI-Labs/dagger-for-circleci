@@ -64,9 +64,9 @@ jobs:
       - dagger-for-circleci/dagger:
           verb: "version"
           debug: true
-      # Test dagger functions command
+      # Test dagger core engine connectivity 
       - dagger-for-circleci/dagger:
-          verb: "functions"
+          verb: "core version"
           debug: true
       # Test with custom flags
       - dagger-for-circleci/dagger:
