@@ -27,6 +27,7 @@ jobs:
       - image: cimg/base:current
     steps:
       - checkout
+      - setup_remote_docker
       # Test the install command with latest version
       - dagger-for-circleci/install:
           version: "latest"
@@ -54,6 +55,7 @@ jobs:
       - image: cimg/base:current
     steps:
       - checkout
+      - setup_remote_docker
       # Install dagger first
       - dagger-for-circleci/install:
           version: "latest"
