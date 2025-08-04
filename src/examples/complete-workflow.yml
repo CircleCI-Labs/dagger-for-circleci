@@ -1,0 +1,34 @@
+description: >
+  Advanced example showing a complete workflow with multiple Dagger operations.
+  This demonstrates using the dagger job for a streamlined CI pipeline.
+
+usage:
+  version: 2.1
+  orbs:
+    dagger: cci-labs/dagger-for-circleci@0.0.1
+  jobs:
+    test-and-build:
+      executor: dagger/default
+      steps:
+        - checkout
+        - dagger/dagger:
+            version: "latest"
+            verb: "call"
+            module: "./ci"
+            call: "test"
+            debug: true
+        - dagger/dagger:
+            verb: "call"
+            module: "./ci"
+            call: "build --platform linux/amd64,linux/arm64"
+            debug: true
+        - dagger/dagger:
+            verb: "call"
+            module: "./ci"
+            call: "publish --registry docker.io"
+            cloud_token: "DAGGER_CLOUD_TOKEN"
+  workflows:
+    ci-cd:
+      jobs:
+        - test-and-build:
+            context: docker-publishing

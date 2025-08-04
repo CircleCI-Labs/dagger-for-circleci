@@ -1,0 +1,28 @@
+description: Restore cached Dagger CLI
+
+parameters:
+  version:
+    type: string
+    default: "latest"
+    description: The version of Dagger to install
+  commit:
+    type: string
+    default: ""
+    description: Dagger dev commit (overrides version)
+  cache_key_prefix:
+    type: string
+    default: v1
+    description: Prefixes a string to all cache keys
+
+steps:
+  - run:
+      name: Store Dagger CLI version as a temporary checksum file
+      environment:
+        ORB_VAL_VERSION: << parameters.version >>
+        ORB_VAL_COMMIT: << parameters.commit >>
+      command: <<include(scripts/dagger-binary-cache.sh)>>
+  - restore_cache:
+      name: Restoring cache for Dagger CLI...
+      keys:
+        - << parameters.cache_key_prefix >>-dagger-cache_cli-{{ arch }}-{{ checksum "/tmp/.dagger-version" }}
+        - << parameters.cache_key_prefix >>-dagger-cache_cli-{{ arch }}-

@@ -1,0 +1,17 @@
+description: >
+  Example showing how to use the dagger run verb to execute commands in a Dagger session.
+  This demonstrates running a Node.js build script with Dagger session environment variables.
+
+usage:
+  version: 2.1
+  orbs:
+    dagger: cci-labs/dagger-for-circleci@0.0.1
+  workflows:
+    build-with-dagger:
+      jobs:
+        - dagger/dagger:
+            version: "latest"
+            verb: "run"
+            args: "node build.js"
+            workdir: "db-service"
+            cloud_token: "DAGGER_CLOUD_TOKEN"

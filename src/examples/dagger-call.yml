@@ -1,0 +1,16 @@
+description: >
+  Basic example showing how to use the dagger job to call a Dagger module function.
+  This demonstrates installing Dagger and calling a simple hello function from the Daggerverse.
+
+usage:
+  version: 2.1
+  orbs:
+    dagger: cci-labs/dagger-for-circleci@0.0.1
+  workflows:
+    hello-dagger:
+      jobs:
+        - dagger/dagger:
+            version: "latest"
+            module: "github.com/shykes/daggerverse/hello"
+            call: "hello --greeting Hola --name Jeremy"
+            cloud_token: "DAGGER_CLOUD_TOKEN"

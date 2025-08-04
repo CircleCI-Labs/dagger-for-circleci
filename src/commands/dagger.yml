@@ -1,0 +1,94 @@
+description: Execute Dagger CLI commands with full parameter support
+
+parameters:
+  version:
+    type: string
+    default: "latest"
+    description: Dagger version (auto-install if specified and not already installed)
+  commit:
+    type: string
+    default: ""
+    description: Dagger dev commit (overrides version)
+  bin_dir:
+    type: string
+    default: "/home/circleci/bin"
+    description: Installation directory for Dagger binary
+  cache_cli:
+    type: boolean
+    default: true
+    description: Enable CLI caching
+  cache_key_prefix:
+    type: string
+    default: "v1"
+    description: Cache key prefix for CLI caching
+  force_install:
+    type: boolean
+    default: false
+    description: Force installation even if Dagger is already present
+  dagger_flags:
+    type: string
+    default: "--progress plain"
+    description: Dagger CLI flags
+  verb:
+    type: string
+    default: "call"
+    description: CLI verb (call, run, download, up, functions, shell, query)
+  workdir:
+    type: string
+    default: "."
+    description: Working directory
+  cloud_token:
+    type: env_var_name
+    default: ""
+    description: Dagger Cloud Token environment variable
+  module:
+    type: string
+    default: ""
+    description: Dagger module to call (local or Git)
+  args:
+    type: string
+    default: ""
+    description: Arguments to pass to CLI
+  call:
+    type: string
+    default: ""
+    description: Arguments to pass to CLI (alias for args)
+  engine_stop:
+    type: boolean
+    default: true
+    description: Whether to stop Dagger Engine
+  debug:
+    type: boolean
+    default: false
+    description: Enable debug logging for Dagger execution
+
+steps:
+  - when:
+      condition: << parameters.version >>
+      steps:
+        - install:
+            version: << parameters.version >>
+            commit: << parameters.commit >>
+            bin_dir: << parameters.bin_dir >>
+            cache_cli: << parameters.cache_cli >>
+            cache_key_prefix: << parameters.cache_key_prefix >>
+            force_install: << parameters.force_install >>
+            debug: << parameters.debug >>
+  - run:
+      name: "Execute Dagger << parameters.verb >>"
+      environment:
+        ORB_VAL_DAGGER_FLAGS: << parameters.dagger_flags >>
+        ORB_VAL_VERB: << parameters.verb >>
+        ORB_VAL_WORKDIR: << parameters.workdir >>
+        ORB_VAL_CLOUD_TOKEN: << parameters.cloud_token >>
+        ORB_VAL_MODULE: << parameters.module >>
+        ORB_VAL_ARGS: << parameters.args >>
+        ORB_VAL_CALL: << parameters.call >>
+        ORB_VAL_DEBUG: << parameters.debug >>
+      command: <<include(scripts/dagger.sh)>>
+  - when:
+      condition: << parameters.engine_stop >>
+      steps:
+        - run:
+            name: "Stop Dagger Engine"
+            command: <<include(scripts/engine-stop.sh)>>

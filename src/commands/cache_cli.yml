@@ -1,0 +1,18 @@
+description: Cache Dagger CLI
+
+parameters:
+  bin_dir:
+    type: string
+    default: "/home/circleci/bin"
+    description: The directory where Dagger should be installed
+  cache_key_prefix:
+    type: string
+    default: v1
+    description: Prefixes a string to all cache keys
+
+steps:
+  - save_cache:
+      name: Saving cache for Dagger CLI...
+      key: << parameters.cache_key_prefix >>-dagger-cache_cli-{{ arch }}-{{ checksum "/tmp/.dagger-version" }}
+      paths:
+        - << parameters.bin_dir >>/dagger

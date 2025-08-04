@@ -16,6 +16,15 @@ Issue Number: N/A
 
 ## What is the new behavior?
 
+## Testing & Validation
+<!-- Please ensure all testing requirements are met before submitting this PR -->
+- [ ] All existing tests pass
+- [ ] New tests have been added for new functionality (if applicable)
+- [ ] CircleCI configuration validation passes (`circleci config validate .circleci/config.yml`)
+- [ ] Orb packing test passes (`./testing/pack-orb.sh`)
+- [ ] All test scripts have been run (`./testing/run-all-tests.sh`)
+- [ ] I have followed the testing guidelines in [testing/README.md](testing/README.md)
+
 ## Does this PR introduce a breaking change?
 - [ ] Yes
 - [ ] No

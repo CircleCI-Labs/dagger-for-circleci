@@ -1,0 +1,102 @@
+description: Complete Dagger job that installs CLI and executes commands
+
+executor: << parameters.executor >>
+
+parameters:
+  # Executor parameters
+  executor:
+    type: executor
+    default: default
+    description: Executor to use for the job
+
+  # Checkout parameter
+  checkout:
+    type: boolean
+    default: true
+    description: Enable checkout step
+
+  # Install command parameters
+  version:
+    type: string
+    default: "latest"
+    description: Dagger version (auto-install if specified and not already installed)
+  commit:
+    type: string
+    default: ""
+    description: Dagger dev commit (overrides version)
+  bin_dir:
+    type: string
+    default: "/home/circleci/bin"
+    description: Installation directory for Dagger binary
+  cache_cli:
+    type: boolean
+    default: true
+    description: Enable CLI caching
+  cache_key_prefix:
+    type: string
+    default: "v1"
+    description: Cache key prefix for CLI caching
+  force_install:
+    type: boolean
+    default: false
+    description: Force installation even if Dagger is already present
+
+  # Dagger command parameters
+  dagger_flags:
+    type: string
+    default: "--progress plain"
+    description: Dagger CLI flags
+  verb:
+    type: string
+    default: "call"
+    description: CLI verb (call, run, download, up, functions, shell, query)
+  workdir:
+    type: string
+    default: "."
+    description: Working directory
+  cloud_token:
+    type: env_var_name
+    default: ""
+    description: Dagger Cloud Token environment variable
+  module:
+    type: string
+    default: ""
+    description: Dagger module to call (local or Git)
+  args:
+    type: string
+    default: ""
+    description: Arguments to pass to CLI
+  call:
+    type: string
+    default: ""
+    description: Arguments to pass to CLI (alias for args)
+  engine_stop:
+    type: boolean
+    default: true
+    description: Whether to stop Dagger Engine
+  debug:
+    type: boolean
+    default: false
+    description: Enable debug logging for Dagger execution
+
+steps:
+  - when:
+      condition: << parameters.checkout >>
+      steps:
+        - checkout
+  - dagger:
+      version: << parameters.version >>
+      commit: << parameters.commit >>
+      bin_dir: << parameters.bin_dir >>
+      cache_cli: << parameters.cache_cli >>
+      cache_key_prefix: << parameters.cache_key_prefix >>
+      force_install: << parameters.force_install >>
+      dagger_flags: << parameters.dagger_flags >>
+      verb: << parameters.verb >>
+      workdir: << parameters.workdir >>
+      cloud_token: << parameters.cloud_token >>
+      module: << parameters.module >>
+      args: << parameters.args >>
+      call: << parameters.call >>
+      engine_stop: << parameters.engine_stop >>
+      debug: << parameters.debug >>

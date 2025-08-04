@@ -1,0 +1,55 @@
+description: Install Dagger CLI for running Dagger workflows
+
+parameters:
+  version:
+    type: string
+    default: "latest"
+    description: The version of Dagger to install
+  debug:
+    type: boolean
+    default: false
+    description: Enable debug logging for installing Dagger
+  bin_dir:
+    type: string
+    default: "/home/circleci/bin"
+    description: The directory where Dagger should be installed
+  force_install:
+    type: boolean
+    default: false
+    description: Force install Dagger if already present
+  cache_cli:
+    type: boolean
+    default: true
+    description: Enables caching of Dagger CLI using CircleCI caching
+  cache_key_prefix:
+    type: string
+    default: v1
+    description: Prefixes a string to all cache keys
+  commit:
+    type: string
+    default: ""
+    description: Dagger dev commit (overrides version)
+
+steps:
+  - when:
+      condition: << parameters.cache_cli >>
+      steps:
+        - restore_cli:
+            version: << parameters.version >>
+            commit: << parameters.commit >>
+            cache_key_prefix: << parameters.cache_key_prefix >>
+  - run:
+      name: "Installing Dagger << parameters.version >>"
+      environment:
+        ORB_VAL_VERSION: << parameters.version >>
+        ORB_VAL_DEBUG: << parameters.debug >>
+        ORB_VAL_BIN_DIR: << parameters.bin_dir >>
+        ORB_VAL_FORCE_INSTALL: << parameters.force_install >>
+        ORB_VAL_COMMIT: << parameters.commit >>
+      command: <<include(scripts/install.sh)>>
+  - when:
+      condition: << parameters.cache_cli >>
+      steps:
+        - cache_cli:
+            bin_dir: << parameters.bin_dir >>
+            cache_key_prefix: << parameters.cache_key_prefix >>
