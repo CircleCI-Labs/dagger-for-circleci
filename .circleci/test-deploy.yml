@@ -69,10 +69,10 @@ jobs:
           verb: "core"
           args: "version"
           debug: true
-      # Test with custom flags
+      # Test with custom dagger flags (before verb)
       - dagger-for-circleci/dagger:
           verb: "version"
-          dagger_flags: "--check"
+          dagger_flags: "--verbose --progress plain"
           debug: true
 
   test-dagger-job:
