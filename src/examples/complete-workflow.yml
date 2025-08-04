@@ -5,7 +5,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    dagger: cci-labs/dagger-for-circleci@0.0.1
+    dagger: cci-labs/dagger-for-circleci@1.0.0
   jobs:
     test-and-build:
       executor: dagger/default
