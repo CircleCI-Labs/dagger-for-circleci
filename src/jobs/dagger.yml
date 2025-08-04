@@ -56,7 +56,7 @@ parameters:
     description: Working directory
   cloud_token:
     type: env_var_name
-    default: ""
+    default: "DAGGER_CLOUD_TOKEN"
     description: Dagger Cloud Token environment variable
   module:
     type: string

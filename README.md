@@ -98,7 +98,7 @@ Executes Dagger CLI commands with full parameter support, including automatic in
 | `dagger_flags` | string | `"--progress plain"` | Dagger CLI flags |
 | `verb` | string | `"call"` | CLI verb (call, run, download, up, functions, shell, query) |
 | `workdir` | string | `"."` | Working directory |
-| `cloud_token` | env_var_name | `""` | Dagger Cloud Token environment variable |
+| `cloud_token` | env_var_name | `"DAGGER_CLOUD_TOKEN"` | Dagger Cloud Token environment variable |
 | `module` | string | `""` | Dagger module to call (local or Git) |
 | `args` | string | `""` | Arguments to pass to CLI |
 | `call` | string | `""` | Arguments to pass to CLI (alias for args) |
@@ -183,7 +183,7 @@ Complete job that installs Dagger and executes the specified command.
 | `dagger_flags` | string | `"--progress plain"` | Dagger CLI flags |
 | `verb` | string | `"call"` | CLI verb (call, run, download, up, functions, shell, query) |
 | `workdir` | string | `"."` | Working directory |
-| `cloud_token` | env_var_name | `""` | Dagger Cloud Token environment variable |
+| `cloud_token` | env_var_name | `"DAGGER_CLOUD_TOKEN"` | Dagger Cloud Token environment variable |
 | `module` | string | `""` | Dagger module to call (local or Git) |
 | `args` | string | `""` | Arguments to pass to CLI |
 | `call` | string | `""` | Arguments to pass to CLI (alias for args) |
