@@ -16,7 +16,7 @@ workflows:
       - orb-tools/pack:
           filters: *filters
       - orb-tools/review:
-          orb_name: dagger-for-circleci
+          orb_name: dagger
           filters: *filters
       - shellcheck/check:
           filters: *filters
